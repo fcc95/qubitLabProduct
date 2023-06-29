@@ -4,16 +4,20 @@ import {SafeAreaView, StyleSheet, View} from 'react-native';
 import ProductList from './screens/productList/ProductList';
 import ProductDetail from './screens/productDetail/ProductDetail';
 import Cart from './screens/cart/Cart';
+import {Provider} from 'react-redux';
+import {store} from './store';
 
 function App(): JSX.Element {
   return (
-    <SafeAreaView>
-      <View style={styles.sectionContainer}>
-        <ProductList />
-        <ProductDetail />
-        <Cart />
-      </View>
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView>
+        <View style={styles.sectionContainer}>
+          <ProductList />
+          <ProductDetail />
+          <Cart />
+        </View>
+      </SafeAreaView>
+    </Provider>
   );
 }
 
