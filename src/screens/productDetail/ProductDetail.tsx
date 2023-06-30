@@ -1,10 +1,13 @@
 import React from 'react';
 import {Text, View} from 'react-native';
+import Button from '../../components/button/Button';
+import Typography from '../../components/typography/Typography';
 
 const ProductDetail = () => {
   return (
     <View>
-      <Text>Product Detail Page</Text>
+      <Typography text={'Product Detail Page'} />
+      <Button title="Add To Cart" handlePress={() => {}} />
     </View>
   );
 };

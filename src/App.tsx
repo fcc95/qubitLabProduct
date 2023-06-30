@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 import ProductList from './screens/productList/ProductList';
 import ProductDetail from './screens/productDetail/ProductDetail';
@@ -10,12 +10,12 @@ import {store} from './store';
 function App(): JSX.Element {
   return (
     <Provider store={store}>
-      <SafeAreaView>
+      <SafeAreaView style={{flex: 1}}>
         <View style={styles.sectionContainer}>
           <ProductList />
-          <ProductDetail />
-          <Cart />
+          {/* <ProductDetail /> */}
         </View>
+        {/* <Cart /> */}
       </SafeAreaView>
     </Provider>
   );

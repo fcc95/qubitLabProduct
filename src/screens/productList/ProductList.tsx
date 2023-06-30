@@ -1,7 +1,11 @@
 import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import ProductImage from '../../components/productImage/ProductImage';
+import Button from '../../components/button/Button';
 import {useAppDispatch, useAppSelector} from '../../store';
 import {getProducts} from '../../store/product/productActions';
+import ProductCard from '../../components/productCard/ProductCard';
+import Typography from '../../components/typography/Typography';
 
 const ProductList = () => {
   const dispatch = useAppDispatch();
@@ -15,7 +19,7 @@ const ProductList = () => {
   if (hasError) {
     return (
       <View>
-        <Text>something wrong</Text>
+        <Typography text={'Something wrong'} color="danger" />
       </View>
     );
   }
@@ -23,7 +27,7 @@ const ProductList = () => {
   if (loading === 'pending') {
     return (
       <View>
-        <Text>loading</Text>
+        <Typography text={'loading...'} />
       </View>
     );
   }
@@ -31,16 +35,23 @@ const ProductList = () => {
   if (!Boolean(products.length)) {
     return (
       <View>
-        <Text>Product not fount</Text>
+        <Typography text={'Product not fount'} />
       </View>
     );
   }
 
   return (
-    <ScrollView>
+    <ScrollView
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}>
       {products.map(product => (
         <View key={product.id} style={styles.productItem}>
-          <Text>{product.title}</Text>
+          <ProductCard
+            imageUrl={product.image}
+            title={product.title}
+            price={product.price}
+            cartMode={true}
+          />
         </View>
       ))}
     </ScrollView>
