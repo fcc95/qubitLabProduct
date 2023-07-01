@@ -3,11 +3,11 @@ import {View, Image, StyleSheet} from 'react-native';
 
 type IProps = {
   imageUrl: string;
-  imageType?: 'small' | 'medium';
+  imageSize?: 'small' | 'medium';
 };
 
-const ProductImage = ({imageUrl, imageType = 'small'}: IProps) => (
-  <View style={styles[imageType]}>
+const ProductImage = ({imageUrl, imageSize = 'small'}: IProps) => (
+  <View style={styles[imageSize]}>
     <Image
       style={styles.image}
       source={{

@@ -5,12 +5,14 @@ import {getProducts} from './productActions';
 
 export type ProductState = {
   products: Array<Product>;
+  selectedProduct: Product | null;
   hasError: boolean;
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
 };
 
 const initialState: ProductState = {
   products: [],
+  selectedProduct: null,
   hasError: false,
   loading: 'idle',
 };
@@ -18,7 +20,17 @@ const initialState: ProductState = {
 export const productSlice = createSlice({
   name: 'productSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    selectProduct: (state, {payload}: PayloadAction<{productId: number}>) => {
+      const {productId} = payload;
+      const selectedProduct = state.products.find(
+        product => product.id === productId,
+      );
+      if (selectedProduct) {
+        state.selectedProduct = selectedProduct;
+      }
+    },
+  },
   extraReducers: (builder: ActionReducerMapBuilder<ProductState>) => {
     builder
       .addCase(getProducts.pending, state => {
@@ -39,3 +51,5 @@ export const productSlice = createSlice({
 });
 
 export default productSlice.reducer;
+
+export const {selectProduct} = productSlice.actions;

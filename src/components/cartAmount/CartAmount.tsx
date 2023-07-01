@@ -8,7 +8,7 @@ type IProps = {amount: number};
 const CartAmount = ({amount}: IProps) => (
   <View style={styles.container}>
     <Typography
-      text={`Total: ${amount}`}
+      text={`Total: $${amount.toFixed(2)}`}
       color="white"
       fontWeight="bold"
       fontSize="large"

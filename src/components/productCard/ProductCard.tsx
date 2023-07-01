@@ -1,33 +1,41 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {ReactNode, useState} from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Product} from '../../store/product/product.types';
 import Button from '../button/Button';
 import ProductImage from '../productImage/ProductImage';
 import QuantityBox from '../quantityBox/QuantityBox';
 import Typography from '../typography/Typography';
 
 type IProps = {
-  imageUrl: string;
-  title: string;
-  price: number;
-  cartMode?: boolean;
+  product: Product;
+  quantity?: number;
+  action?: ReactNode;
+  handleCardClick?: () => void;
 };
 
-const ProductCard = ({imageUrl, title, price, cartMode}: IProps) => (
-  <View style={styles.container}>
-    <ProductImage imageUrl={imageUrl} />
-    <View style={styles.description}>
-      <Typography text={title} />
-      <Typography text={price} />
-    </View>
-    {cartMode && (
-      <View style={styles.actionsContainer}>
-        <Button title="+" style={styles.actionButton} handlePress={() => {}} />
-        <QuantityBox quantity={12} />
-        <Button title="-" style={styles.actionButton} handlePress={() => {}} />
+const ProductCard = ({
+  product,
+  quantity = 1,
+  action,
+  handleCardClick,
+}: IProps) => {
+  const {image, title, price} = product;
+  const productPrice = price * quantity;
+
+  return (
+    <TouchableOpacity
+      activeOpacity={handleCardClick ? 0.5 : 0}
+      onPress={handleCardClick}
+      style={styles.container}>
+      <ProductImage imageUrl={image} />
+      <View style={styles.description}>
+        <Typography text={title} />
+        <Typography text={`$${productPrice.toFixed(2)}`} />
       </View>
-    )}
-  </View>
-);
+      {Boolean(action) && action}
+    </TouchableOpacity>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -44,8 +52,6 @@ const styles = StyleSheet.create({
     gap: 5,
     paddingHorizontal: 8,
   },
-  actionsContainer: {gap: 7},
-  actionButton: {width: 40, paddingVertical: 8},
 });
 
 export default ProductCard;

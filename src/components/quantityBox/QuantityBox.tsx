@@ -13,7 +13,9 @@ const QuantityBox = ({quantity}: IProps) => (
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    padding: 6,
+    justifyContent: 'center',
+    width: 40,
+    height: 40,
     borderWidth: 1,
     borderRadius: 6,
   },

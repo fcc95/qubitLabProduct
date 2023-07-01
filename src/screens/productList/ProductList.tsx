@@ -6,6 +6,8 @@ import {useAppDispatch, useAppSelector} from '../../store';
 import {getProducts} from '../../store/product/productActions';
 import ProductCard from '../../components/productCard/ProductCard';
 import Typography from '../../components/typography/Typography';
+import {Product} from '../../store/product/product.types';
+import {selectProduct} from '../../store/product/productSlice';
 
 const ProductList = () => {
   const dispatch = useAppDispatch();
@@ -15,6 +17,10 @@ const ProductList = () => {
   useEffect(() => {
     dispatch(getProducts());
   }, []);
+
+  const handleSelect = (productId: number) => {
+    dispatch(selectProduct({productId}));
+  };
 
   if (hasError) {
     return (
@@ -47,10 +53,10 @@ const ProductList = () => {
       {products.map(product => (
         <View key={product.id} style={styles.productItem}>
           <ProductCard
-            imageUrl={product.image}
-            title={product.title}
-            price={product.price}
-            cartMode={true}
+            product={product}
+            handleCardClick={() => {
+              handleSelect(product.id);
+            }}
           />
         </View>
       ))}
