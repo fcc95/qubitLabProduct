@@ -23,7 +23,10 @@ const Cart = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
+      <ScrollView
+        style={styles.scroll}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}>
         {Object.keys(items).map((productId: string) => (
           <ProductCard
             key={productId}
@@ -57,6 +60,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  scroll: {paddingHorizontal: 10},
 });
 
 export default Cart;

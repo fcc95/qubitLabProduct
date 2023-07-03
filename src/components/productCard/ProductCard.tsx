@@ -1,9 +1,7 @@
-import React, {ReactNode, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {ReactNode} from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {Product} from '../../store/product/product.types';
-import Button from '../button/Button';
 import ProductImage from '../productImage/ProductImage';
-import QuantityBox from '../quantityBox/QuantityBox';
 import Typography from '../typography/Typography';
 
 type IProps = {
@@ -24,7 +22,7 @@ const ProductCard = ({
 
   return (
     <TouchableOpacity
-      activeOpacity={handleCardClick ? 0.5 : 0}
+      activeOpacity={handleCardClick ? 0.5 : 1}
       onPress={handleCardClick}
       style={styles.container}>
       <ProductImage imageUrl={image} />

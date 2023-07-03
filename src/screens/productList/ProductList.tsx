@@ -1,17 +1,16 @@
 import React, {useEffect} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import ProductImage from '../../components/productImage/ProductImage';
-import Button from '../../components/button/Button';
+import {ScrollView, StyleSheet, View} from 'react-native';
 import {useAppDispatch, useAppSelector} from '../../store';
 import {getProducts} from '../../store/product/productActions';
 import ProductCard from '../../components/productCard/ProductCard';
 import Typography from '../../components/typography/Typography';
-import {Product} from '../../store/product/product.types';
 import {selectProduct} from '../../store/product/productSlice';
+import {NavigationProp, useNavigation} from '@react-navigation/core';
+import {NavigationParamsList} from '../../navigation/navigation.config';
 
 const ProductList = () => {
   const dispatch = useAppDispatch();
-
+  const navigation = useNavigation<NavigationProp<NavigationParamsList>>();
   const {products, loading, hasError} = useAppSelector(state => state.product);
 
   useEffect(() => {
@@ -47,24 +46,28 @@ const ProductList = () => {
   }
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      showsHorizontalScrollIndicator={false}>
-      {products.map(product => (
-        <View key={product.id} style={styles.productItem}>
-          <ProductCard
-            product={product}
-            handleCardClick={() => {
-              handleSelect(product.id);
-            }}
-          />
-        </View>
-      ))}
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}>
+        {products.map(product => (
+          <View key={product.id} style={styles.productItem}>
+            <ProductCard
+              product={product}
+              handleCardClick={() => {
+                handleSelect(product.id);
+                navigation.navigate('ProductDetail');
+              }}
+            />
+          </View>
+        ))}
+      </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {paddingHorizontal: 12},
   productItem: {
     marginTop: 10,
   },

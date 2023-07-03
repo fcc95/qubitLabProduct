@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import Button from '../../components/button/Button';
 import ProductImage from '../../components/productImage/ProductImage';
 import QuantityBox from '../../components/quantityBox/QuantityBox';
@@ -39,9 +40,14 @@ const ProductDetail = () => {
           <Typography text={`$${selectedProduct.price}`} />
         </View>
       </View>
-      <View style={styles.description}>
-        <Typography text={selectedProduct.description} />
-      </View>
+      <ScrollView
+        style={styles.description}
+        showsVerticalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false}>
+        <View style={styles.description}>
+          <Typography text={selectedProduct.description} />
+        </View>
+      </ScrollView>
       <View>
         <View style={styles.action}>
           <Button
@@ -67,6 +73,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
     paddingVertical: 15,
+    paddingHorizontal: 12,
   },
   header: {
     flexDirection: 'row',
@@ -77,8 +84,9 @@ const styles = StyleSheet.create({
     gap: 5,
     paddingHorizontal: 8,
   },
+
   description: {
-    paddingVertical: 10,
+    marginVertical: 10,
   },
   action: {
     flexDirection: 'row',
