@@ -44,3 +44,6 @@ You don't have to ever use eject. The curated feature set is suitable for small 
 You can learn more in the React Native documentation.
 
 To learn React Native CLI, check out the React Native CLI documentation.
+
+
+## Android APK directory: AndroidApk -> app-release.apk
